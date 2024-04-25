@@ -3,8 +3,8 @@
 use App\Http\Route;
 
 Route::get('/',               'CryptographyController@index');
-Route::get('/fetch',          'CryptographyController@fetch');
-Route::post('/encrypt',              'CryptographyController@encrypt');
-Route::get('/value/{id}',           'CryptographyController@findById');
-Route::put('/update/{id}',         'CryptographyController@update');
-Route::delete('/{id}/delete', 'CryptographyController@remove');
+Route::get('/users/fetch',          'CryptographyController@fetch');
+Route::post('/user/encrypt',              'CryptographyController@encrypt');
+Route::get('/user/{id}',           'CryptographyController@findById');
+Route::put('/user/update/{id}',         'CryptographyController@update');
+Route::delete('/user/{id}/delete', 'CryptographyController@remove');

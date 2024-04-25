@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Http\Request;
 use App\Http\Response;
+use App\Services\UserService;
 
 class CryptographyController
 {
@@ -18,8 +19,10 @@ class CryptographyController
     {
     }
 
-    public function encrypt()
+    public function encrypt(Request $request, Response $response)
     {
+        $body = $request->body();
+        $save = UserService::create($body);
     }
 
     public function findById(string $id)
