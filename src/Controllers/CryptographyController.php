@@ -15,25 +15,101 @@ class CryptographyController
         ]);
     }
 
-    public function fetch()
+    public function fetchAll(Request $request, Response $response)
     {
+        $users = UserService::fetch();
+
+        if (isset($users['error'])) {
+            return $response::json([
+                'error'   => true,
+                'success' => false,
+                'message' => $users['error']
+            ]);
+        }
+
+        return $response::json([
+            'error'   => false,
+            'success' => true,
+            'message' => $users
+        ]);
     }
 
     public function encrypt(Request $request, Response $response)
     {
         $body = $request->body();
-        $save = UserService::create($body);
+        $encrypt = UserService::create($body);
+
+        if (isset($encrypt['error'])) {
+            return $response::json([
+                'error'   => true,
+                'success' => false,
+                'message' => $encrypt['error']
+            ]);
+        }
+
+        return $response::json([
+            'error' => false,
+            'success' => true,
+            'message' => $encrypt
+        ]);
     }
 
-    public function findById(string $id)
+    public function findById(Request $request, Response $response, array $id)
     {
+        $user = UserService::findById($id[0]);
+
+        if (isset($user['error'])) {
+            return $response::json([
+                'error'   => true,
+                'success' => false,
+                'message' => $user['error']
+            ]);
+        }
+
+        return $response::json([
+            'error'   => false,
+            'success' => true,
+            'message' => $user
+        ]);
     }
 
-    public function update()
+    public function update(Request $request, Response $response, array $id)
     {
+        $body = $request->body();
+
+        $users = UserService::update($id[0], $body);
+
+        if (isset($users['error'])) {
+            return $response::json([
+                'error'     => true,
+                'success'   => false,
+                'message'   => $users['error']
+            ]);
+        }
+
+        return $response::json([
+            'error' => false,
+            'success' => true,
+            'message' => $users
+        ]);
     }
 
-    public function remove(string $id)
+    public function remove(Request $request, Response $response, array $id)
     {
+        $user = UserService::delete($id[0]);
+
+        if (isset($user['error'])) {
+            return $response::json([
+                'error'     => true,
+                'success'   => false,
+                'message'   => $user['error']
+            ]);
+        }
+
+        return $response::json([
+            'error'     => false,
+            'success'   => true,
+            'message'   => $user
+        ]);
     }
 }

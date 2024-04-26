@@ -31,8 +31,8 @@ class UserService
 
             return "User created successfully";
         } catch (\PDOException $e) {
-            if ($e->errorInfo[0] === '08006') return ['error' => 'Sorry, we could not connect to the database.'];
-            if ($e->errorInfo[0] === '23505') return ['error' => 'Sorry, user already exists.'];
+            if ($e->errorInfo[0] === '08006') return ['error' => 'We could not connect to the database.'];
+            if ($e->errorInfo[0] === '23505') return ['error' => 'User already exists.'];
 
             return ['error' => $e->getMessage()];
         } catch (\Exception $e) {
@@ -49,8 +49,8 @@ class UserService
 
             return $users;
         } catch (\PDOException $e) {
-            if ($e->errorInfo[0] === '08006') return ['error' => 'Sorry, we could not connect to the database.'];
-            if ($e->errorInfo[0] === '23505') return ['error' => 'Sorry, user already exists.'];
+            if ($e->errorInfo[0] === '08006') return ['error' => 'We could not connect to the database.'];
+            if ($e->errorInfo[0] === '23505') return ['error' => 'User already exists.'];
 
             return ['error' => $e->getMessage()];
         } catch (\Exception $e) {
@@ -67,8 +67,8 @@ class UserService
 
             return $user;
         } catch (\PDOException $e) {
-            if ($e->errorInfo[0] === '08006') return ['error' => 'Sorry, we could not connect to the database.'];
-            if ($e->errorInfo[0] === '23505') return ['error' => 'Sorry, user already exists.'];
+            if ($e->errorInfo[0] === '08006') return ['error' => 'We could not connect to the database.'];
+            if ($e->errorInfo[0] === '23505') return ['error' => 'User already exists.'];
 
             return ['error' => $e->getMessage()];
         } catch (\Exception $e) {
@@ -97,12 +97,12 @@ class UserService
 
             $user = User::update($id, $userValidated);
 
-            if (!$user) return ['error' => 'we could not update your account.'];
+            if (!$user) return ['error' => 'We could not update your account.'];
 
             return "User updated successfully!";
         } catch (\PDOException $e) {
-            if ($e->errorInfo[0] === '08006') return ['error' => 'Sorry, we could not connect to the database.'];
-            if ($e->errorInfo[0] === '23505') return ['error' => 'Sorry, user already exists.'];
+            if ($e->errorInfo[0] === '08006') return ['error' => 'We could not connect to the database.'];
+            if ($e->errorInfo[0] === '23505') return ['error' => 'User already exists.'];
 
             return ['error' => $e->getMessage()];
         } catch (\Exception $e) {
@@ -119,8 +119,8 @@ class UserService
 
             return "User deleted successfully!";
         } catch (\PDOException $e) {
-            if ($e->errorInfo[0] === '08006') return ['error' => 'Sorry, we could not connect to the database.'];
-            if ($e->errorInfo[0] === '23505') return ['error' => 'Sorry, user already exists.'];
+            if ($e->errorInfo[0] === '08006') return ['error' => 'We could not connect to the database.'];
+            if ($e->errorInfo[0] === '23505') return ['error' => 'User already exists.'];
 
             return ['error' => $e->getMessage()];
         } catch (\Exception $e) {

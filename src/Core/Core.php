@@ -15,6 +15,7 @@ class Core
         $url !== '/' && $url = rtrim($url, '/');
 
         $prefixController = 'App\\Controllers\\';
+        $routeFound = false;
 
         foreach ($routes as  $route) {
             $pattern = '#^' . preg_replace('/{id}/', '([\w-]+)', $route['path']) . '$#';
@@ -22,13 +23,8 @@ class Core
             if (preg_match($pattern, $url, $matches)) {
                 array_shift($matches);
 
-                if ($route['path'] !== Request::uri()) {
-                    Response::json([
-                        'error'   => true,
-                        'success' => false,
-                        'message' => 'Route not found.'
-                    ], 404);
-                }
+                $routeFound = true;
+
                 if ($route['method'] !== Request::method()) {
                     Response::json([
                         'error'   => true,
@@ -44,6 +40,14 @@ class Core
                 $extendController = new $controller();
                 $extendController->$action(new Request, new Response, $matches);
             }
+        }
+
+        if (!$routeFound) {
+            return Response::json([
+                'error'   => true,
+                'success' => false,
+                'message' => 'Route not found.'
+            ], 404);
         }
     }
 }
